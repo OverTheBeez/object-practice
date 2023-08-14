@@ -127,7 +127,7 @@ const peopleOne = [
   "Biondo, Frank",
 ];
 
-console.table(inventors);
+// console.table(inventors);
 
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's
@@ -139,10 +139,10 @@ const fifteen = inventors.filter(function (inventor) {
   }
 });
 // original array with all inventors
-console.log(inventors);
+// console.log(inventors);
 
 // array with inventors birthyear..? in the fifteen hundreds
-console.log(fifteen);
+// console.log(fifteen);
 
 // Array.prototype.map()
 // 2. Give us an array of the inventors first and last names
@@ -154,7 +154,7 @@ console.log(fifteen);
 const fullNames = inventors.map(
   (inventor) => `${inventor.first} ${inventor.last}`
 );
-console.log(fullNames);
+// console.log(fullNames);
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
@@ -173,7 +173,7 @@ console.log(fullNames);
 // });
 
 const ordered = inventors.sort((a, b) => a.year - b.year);
-console.table(ordered);
+// console.table(ordered);
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live all together?
@@ -186,7 +186,7 @@ const totalYears = inventors.reduce((total, inventor) => {
   return total + (inventor.passed - inventor.year);
 }, 0);
 
-console.log(totalYears);
+// console.log(totalYears);
 
 // 5. Sort the inventors by years lived
 const oldest = inventors.sort((a, b) => {
@@ -195,7 +195,7 @@ const oldest = inventors.sort((a, b) => {
   return second - first;
 });
 
-console.table(oldest);
+// console.table(oldest);
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -221,7 +221,7 @@ const alpha = peopleOne.sort(function (lastOne, nextOne) {
   return aLast > bLast ? 1 : -1;
 });
 
-console.log(alpha);
+// console.log(alpha);
 
 // 8. Reduce Exercise
 // Sum up the instances of each of these
@@ -258,7 +258,7 @@ const transportation = data.reduce(function (obj, item) {
   return obj;
 }, {});
 
-console.log(transportation);
+// console.log(transportation);
 
 /* ---- Array Cardio Day 2 ---- */
 const peopleTwo = [
@@ -284,7 +284,7 @@ const isAdultSome = peopleTwo.some(function (person) {
   const currentYear = new Date().getFullYear();
   if (currentYear - person.year >= 19) return true;
 });
-console.log(isAdultSome);
+// console.log(isAdultSome);
 
 // Array.prototype.every() // is everyone 19 or older?
 // similar to some, every only returns true if every element meets the criteria specified in the function
@@ -292,7 +292,7 @@ const isAdultEvery = peopleTwo.every(function (person) {
   const currentYear = new Date().getFullYear();
   if (currentYear - person.year >= 19) return true;
 });
-console.log(isAdultEvery);
+// console.log(isAdultEvery);
 
 // Array.prototype.find()
 // Find is like filter, but instead returns just the one you are looking for
@@ -303,20 +303,228 @@ console.log(isAdultEvery);
 
 const comment = comments.find((comment) => comment.id === 823423);
 
-console.log(comment);
+// console.log(comment);
 
 // Array.prototype.findIndex()
 // Find the comment with this ID
 // delete the comment with the ID of 823423
 const index = comments.findIndex((comment) => comment.id === 823423);
-console.log(index);
+// console.log(index);
 
 // few different ways to delete the element from an array (since thats what findIndex might be mainly used for)
 // using the splice method, we can target the index we just got and with the second parameter only delete 1 element which is the index we passed in
 // comments.splice(index, 1);
-console.log(comments);
+// console.log(comments);
 
 // different way -> creating a new array and spreading arrays into it using the slice method to not include the index we got with findIndex
 // the idea is that we have two arrays, the first one that is sliced up to the index (since it isn't included), and the second one where we start at the element of index + 1, so we skip out initial index, leaving it out
 // then we just use the spread operators to spread the arrays into the new array
 const newComments = [...comments.slice(0, index), ...comments.slice(index + 1)];
+
+const add = function (a, b) {
+  return a + b;
+};
+
+const subtract = function (...nums) {
+  const [arr] = [...nums];
+
+  return arr.reduce((total, num) => {
+    return total - num;
+  }, 0);
+};
+
+const sum = function (...nums) {
+  const [arr] = [...nums];
+
+  return arr.reduce((total, num) => {
+    return total + num;
+  }, 0);
+};
+
+const multiply = function (...nums) {
+  const [arr] = [...nums];
+
+  return arr.reduce((total, num) => {
+    return total * num;
+  }, 1);
+};
+
+const power = function (a, b) {
+  return Math.pow(a, b);
+};
+
+// const factorial = function (num) {
+//   if (num === 0) {
+//     return 1;
+//   } else {
+//     let total = num * (num - 1);
+//     for (let i = num - 2; i >= 1; i--) {
+//       total *= i;
+//     }
+//   }
+// };
+
+const factorial = function (num) {
+  // easy solution compared to mine
+  // the biggest thing was initializing the starting value (or total) to 0, if we started it at 1, we could have just looped through without getting hung up on the first loop
+  // 1 * i(5) = 5
+  // 5 * i(4) = 20
+  // 20 * i(3) = 60
+  // 60 * i(2) = 120
+  // 60 * i(1) = 120
+  let total = 1;
+  for (let i = num; i > 0; i--) {
+    total *= i;
+  }
+  console.log(total);
+};
+
+// console.log(add(1, 2));
+// console.log(subtract([1, 2, 3, 4]));
+// console.log(sum([1, 2, 3, 4]));
+// console.log(multiply([2, 4, 6, 8, 10, 12, 14]));
+// console.log(power(3, 3));
+// console.log(factorial(5));
+
+const palindromes = function (str) {
+  const strippedString = str
+    .toLowerCase()
+    .replace(/[^\w\s\']|_/g, "")
+    .replace(/\s+/g, "");
+
+  let counterBack = strippedString.length;
+
+  for (let i = 0; i <= strippedString.length / 2; i++) {
+    if (strippedString[i] !== strippedString[counterBack - 1]) {
+      return false;
+    }
+    counterBack--;
+    // console.log(`String first half: ${strippedString[i]}`);
+    // console.log(`String last half: ${strippedString[counterBack - 1]}`);
+  }
+  return true;
+};
+
+// palindromes("racecar");
+// palindromes("racecar!");
+// palindromes("A car, a man, a maraca.");
+// palindromes("rac3e3car");
+// palindromes("r3ace3car");
+
+const fibonacci = function (count) {
+  if (count < 0) return "OOPS";
+  if (count === 0) return 0;
+  // i was on the right track
+  // the values keep swapping within the loop
+  // current value = first + second
+  // first will have seconds value
+  // and second will have the current value
+  // and they keep swapping
+  let first = 0;
+  let second = 1;
+
+  // really tricky one here
+  // part point is to start the loop at 1, not 0 like normal
+  // the idea is to always print or have Fx(fibonacci) be the first value
+  for (let i = 1; i <= count; i++) {
+    console.log(`Value stored in first: ${first}`);
+
+    let current = first + second;
+    first = second;
+    second = current;
+    // console.log(`Current: ${current} First: ${first} Second: ${second}`);
+  }
+  console.log(first);
+
+  return first;
+};
+
+// fibonacci(8);
+
+const getTheTitles = function (books) {
+  const titles = books.map((book) => book.title);
+  return titles;
+};
+
+const books = [
+  {
+    title: "Book",
+    author: "Name",
+  },
+  {
+    title: "Book2",
+    author: "Name2",
+  },
+];
+// getTheTitles(books);
+
+// const people = [
+//   {
+//     name: "Carly",
+//     yearOfBirth: 1942,
+//     yearOfDeath: 1970,
+//   },
+//   {
+//     name: "Ray",
+//     yearOfBirth: 1962,
+//     yearOfDeath: 2011,
+//   },
+//   {
+//     name: "Jane",
+//     yearOfBirth: 1912,
+//     yearOfDeath: 1941,
+//   },
+// ];
+
+// const people = [
+//   {
+//     name: "Carly",
+//     yearOfBirth: 2018,
+//   },
+//   {
+//     name: "Ray",
+//     yearOfBirth: 1962,
+//     yearOfDeath: 2011,
+//   },
+//   {
+//     name: "Jane",
+//     yearOfBirth: 1912,
+//     yearOfDeath: 1941,
+//   },
+// ];
+
+const people = [
+  {
+    name: "Carly",
+    yearOfBirth: 1066,
+  },
+  {
+    name: "Ray",
+    yearOfBirth: 1962,
+    yearOfDeath: 2011,
+  },
+  {
+    name: "Jane",
+    yearOfBirth: 1912,
+    yearOfDeath: 1941,
+  },
+];
+
+const findTheOldest = function (people) {
+  const oldest = people
+    .map((person) => {
+      !person.yearOfDeath
+        ? (person.age = new Date().getFullYear() - person.yearOfBirth)
+        : (person.age = person.yearOfDeath - person.yearOfBirth);
+
+      console.log(person);
+
+      return person;
+    })
+    .sort((a, b) => a.age - b.age)
+    .slice(-1);
+  console.log(oldest);
+
+  return oldest[0].name;
+};
+console.log(findTheOldest(people));
